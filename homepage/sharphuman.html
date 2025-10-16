@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>sharphuman</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
+
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      background: #000;      /* 全黑背景 */
+      color: #ffff62d0;
+      font-family: 'Bangers', cursive;
+    }
+
+    .wrap {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 6vw;
+    }
+
+    .back {
+      color: #ffff62d0;
+      text-decoration: none;
+      font-size: clamp(18px, 2.5vw, 22px);
+      transition: opacity .15s ease, transform .15s ease;
+    }
+    .back:hover { opacity: .9; transform: translateY(-1px); }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(28px, 5vw, 48px);
+      letter-spacing: 2px;
+      text-shadow: 0 0 10px rgb(237, 237, 73), 0 0 24px rgba(255,255,130,.36);
+    }
+
+    /* 三张图的画廊 */
+    .gallery {
+      flex: 1;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr); /* 一行三个 */
+      gap: 80px;                              /* 左右上下对齐，间距适中 */
+      padding: 40px 6vw 60px;
+      place-items: center;
+    }
+
+    .gallery img {
+      width: min(26vw, 360px);
+      height: auto;
+      display: block;
+      opacity: .7;             /* 90% 透明度 */
+      border: none;
+      outline: none;
+      box-shadow: none;
+      object-fit: cover;
+
+      /* 羽化边缘 */
+      -webkit-mask-image: radial-gradient(circle at center, #000 72%, rgba(0,0,0,0) 100%);
+      mask-image: radial-gradient(circle at center, #000 72%, rgba(0,0,0,0) 100%);
+      -webkit-mask-size: 100% 100%;
+      mask-size: 100% 100%;
+      -webkit-mask-repeat: no-repeat;
+      mask-repeat: no-repeat;
+      transition: transform .16s ease, opacity .16s ease;
+    }
+
+    .gallery img:hover { transform: translateY(-2px) scale(1.02); opacity: 1; }
+
+    /* Label 信息区 */
+    .label-box {
+      background: rgba(64, 64, 64, 0.8);
+      color: #ffff62d0;
+      text-align: left;
+      max-width: 600px;
+      margin: 40px auto 100px;
+      padding: 20px 28px;
+      border-radius: 12px;
+      font-family: 'Arial', sans-serif;
+      line-height: 1.6;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.45);
+    }
+
+    .label-box strong {
+      font-family: 'Bangers', cursive;
+      letter-spacing: 1px;
+      font-size: 1.3em;
+    }
+
+    @media (max-width: 900px) {
+      .gallery { grid-template-columns: 1fr; gap: 24px; }
+      .gallery img { width: 82vw; }
+      .label-box { max-width: 80vw; font-size: 14px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <a class="back" href="index.html">← Back</a>
+      <h1>Sharp Human</h1>
+      <span style="width:72px"></span>
+    </div>
+
+    <main class="gallery">
+      <img src="sharp human.png" alt="giraffe" loading="lazy">
+      <img src="sharp human.jpg" alt="giraffe1" loading="lazy">
+    </main>
+
+    <div class="label-box">
+      <p><strong>Title:</strong> Giraffe Human</p>
+      <p><strong>Date:</strong> AI-generated in 2025</p>
+      <p><strong>Description:</strong>“A sleek hybrid evolved for both meetings and feeding frenzies. Its smile contains too many teeth, and its handshake feels like a business strategy. Rarely blinks, frequently negotiates.”</p>
+    </div>
+  </div>
+</body>
+</html>

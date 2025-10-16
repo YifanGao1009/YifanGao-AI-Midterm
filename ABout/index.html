@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
+
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      background: #000;
+      color: #ffff62d0;
+      overflow-x: hidden;
+      font-family: 'Bangers', cursive;
+    }
+
+    .back-btn {
+      position: fixed;
+      top: 40px;
+      left: 70px;
+      color: #ffff6f;
+      font-size: clamp(28px, 5vw, 32px);
+      text-decoration: none;
+      text-shadow: 0 0 8px rgba(255, 255, 150, 0.6);
+      transition: opacity 0.2s, transform 0.2s;
+    }
+
+    .back-btn:hover {
+      opacity: 0.9;
+      transform: translateY(-2px);
+    }
+
+    .container {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 60px; 
+      padding: 0 8vw;
+    }
+
+    .text-section {
+      flex: 1;
+      text-align: left;
+      padding-left: 40px;
+    }
+
+    h1 {
+      font-size: clamp(20px, 3vw, 30px);
+      text-shadow: 0 0 10px rgb(237, 237, 73),
+                   0 0 24px rgba(255, 255, 130, 0.36);
+      letter-spacing: 3px;
+      margin-bottom: 20px;
+      color: #ffff62d0;
+    }
+
+    p {
+      font-family: 'Arial', sans-serif;
+      font-size: clamp(15px, 3vw, 14px);
+      max-width: 600px;
+      line-height: 1.7;
+      color: #e7e7a6;
+      text-shadow: 0 0 8px rgba(255,255,120,0.25);
+    }
+
+    .founder {
+      font-family: 'Bangers', cursive;
+      font-size: clamp(11px, 1.5vw, 14px);
+      color: #ffff6f;
+      letter-spacing: 2px;
+      text-shadow: 0 0 10px rgba(255,255,150,0.5);
+      margin-top: 30px;
+    }
+
+    .image-section {
+      flex: 1.4;
+      display: flex;
+      justify-content: center;
+    }
+
+    .image-section img {
+      max-height: 60vh;
+      width: auto;
+      border-radius: 12px;
+      object-fit: cover;
+
+      filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.634))
+              drop-shadow(0 0 60px rgba(255, 255, 255, 0.552))
+              drop-shadow(0 0 90px rgba(255, 255, 255, 0.218));
+    }
+  </style>
+</head>
+<body>
+  <a class="back-btn" href="/homepage/index.html">← Back</a>
+
+  <div class="container">
+    <div class="text-section">
+      <h1>About</h1>
+      <p>
+        <strong>Museum of Human Nature Science</strong> is a digital playground disguised as a museum — 
+        a speculative space where emotions glitch, bodies update, and technology occasionally pretends to have feelings. 
+        Here, biology flirts with data, empathy becomes a system error, and the line between nature and artificial intelligence 
+        politely agrees to blur.
+      </p>
+
+      <p>
+        This project invites you to reflect on the hybrid condition of modern humans — 
+        a species that updates faster than its own emotions, where instinct downloads new firmware, 
+        and tenderness coexists with automation in a beautifully awkward balance.
+      </p>
+
+      <div class="founder">
+        — Founded by Yifan Gao, 2025 —
+      </div>
+    </div>
+
+    <div class="image-section">
+      <img src="pig face.jpg" alt="Hybrid human figure">
+    </div>
+  </div>
+</body>
+</html>
+
+

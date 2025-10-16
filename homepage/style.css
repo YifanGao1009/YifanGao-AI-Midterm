@@ -1,0 +1,304 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  background: #000;
+  color: #ffff62d0;
+  overflow-x: hidden;
+}
+
+#starfield {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  display: block;
+  pointer-events: none;   /* ✅ 不再拦截滚动/触摸 */
+}
+
+
+.about-btn {
+  position: fixed;
+  top: 80px;
+  right: 90px;
+  z-index: 2;
+  font-family: 'Bangers', cursive;
+  font-size: clamp(30px, 4vw, 32px);
+  color: #ffff62d0;
+  text-decoration: none;
+  text-shadow: 0 0 8px rgba(255,255,150,0.6),
+               0 0 18px rgba(255,255,100,0.3);
+  letter-spacing: 2px;
+  transition: transform .15s ease, opacity .15s ease;
+  cursor: pointer;
+}
+.about-btn:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+/* 页面内容布局 */
+.content {
+  position: relative;
+  z-index: 1;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 4rem 1rem;
+}
+
+/* 主标题 */
+h1 {
+  font-family: 'Bangers', cursive;
+  font-size: clamp(72px, 16vw, 200px);
+  margin-top: 200px;
+  letter-spacing: 4px;
+  text-shadow: 0 0 10px rgb(237, 237, 73),
+               0 0 24px rgba(255, 255, 130, 0.36);
+}
+
+/* ✅ 图片容器：一行 3 个，上下对齐，行距大 */
+.photo-container {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(240px, 1fr));
+  justify-items: center;        /* ✅ 每个格子内居中 */
+  justify-content: center;      /* ✅ 整个网格在容器内居中 */
+  align-items: center;
+  gap: 100px 60px;
+
+  width: 100%;
+  max-width: 1200px;            /* ✅ 给网格一个最大宽度 */
+  margin: 190px auto 0;         /* ✅ 居中（auto 两侧外边距） */
+  padding: 0 6vw;
+}
+
+/* ✅ 图片按钮样式 */
+.photo-btn {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: none;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  cursor: pointer;
+  transition: transform .16s ease, opacity .16s ease;
+}
+.photo-btn:hover {
+  transform: translateY(-2px) scale(1.02);
+}
+
+/* ✅ 图片统一大小 + 羽化边缘 + 90% 透明度 */
+.photo-btn img {
+  width: min(26vw, 320px);
+  height: auto;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  opacity: 0.8;
+  object-fit: cover;
+
+  /* 边缘羽化（虚化） */
+  -webkit-mask-image: radial-gradient(circle at center, #000 72%, rgba(0,0,0,0) 100%);
+  mask-image: radial-gradient(circle at center, #000 72%, rgba(0,0,0,0) 100%);
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
+
+/* 不再左移第一张 */
+#cover1 {
+  transform: none;
+}
+
+/* hover 标签（保留） */
+.photo-label {
+  position: absolute;
+  right: 14px;
+  bottom: 10px;
+  max-width: calc(100% - 28px);
+  padding: 6px 10px;
+  border-radius: 10px;
+  font: 500 14px/1.25 system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  color: rgba(255,255,255,.92);
+  background: rgba(0,0,0,.45);
+  text-shadow: 0 1px 2px rgba(0,0,0,.4);
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity .18s ease, transform .18s ease;
+}
+.photo-btn:hover .photo-label,
+.photo-btn:focus-visible .photo-label {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ✅ 小屏幕自动上下排列 */
+@media (max-width: 768px) {
+  .photo-container {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .photo-btn img {
+    width: 80vw;
+  }
+}
+
+/* ✅ 标题放大 40% */
+h1, h2, h3, h4, h5, h6 {
+  font-size: 140%;
+}
+
+/* === Hover 弹窗（灰底 + 黄色字）— 仅改CSS，无需动HTML === */
+.photo-btn { position: relative; }
+
+/* 弹窗主体 */
+.photo-btn::after {
+  position: absolute;
+  z-index: 5;
+  bottom: 110%;                      /* 弹在图片上方；要在下方可改为 top:110% 并调整 before */
+  left: 50%;
+  transform: translateX(-50%) translateY(6px);
+  max-width: min(60vw, 34rem);
+  padding: 12px 14px;
+  border-radius: 12px;
+
+  background: rgba(64,64,64,0.92);   /* 灰色窗口 */
+  color: #ffff62d0;                  /* 与标题一致的黄色字 */
+  text-align: left;
+  font: 500 14px/1.45 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  letter-spacing: .2px;
+  box-shadow: 0 8px 30px rgba(0,0,0,.45);
+  pointer-events: none;              /* 不挡鼠标 */
+  opacity: 0;
+  transition: opacity .18s ease, transform .18s ease;
+  white-space: normal;
+
+  /* 默认空，下面用 nth-child 分别设置文本 */
+  content: "";
+}
+
+/* 悬停/聚焦时显现 */
+.photo-btn:hover::after,
+.photo-btn:focus-within::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+.photo-btn:hover::before,
+.photo-btn:focus-within::before {
+  opacity: 1;
+}
+
+.photo-container .photo-btn:nth-child(1)::after { content: "Polar Bear Human"; }
+.photo-container .photo-btn:nth-child(2)::after { content: "Bat Human"; }
+.photo-container .photo-btn:nth-child(3)::after { content: "Axolotl Human"; }
+.photo-container .photo-btn:nth-child(4)::after { content: "Giraffe Human"; }
+.photo-container .photo-btn:nth-child(5)::after { content: "Sharp Human"; }
+.photo-container .photo-btn:nth-child(6)::after { content: "Frog Human"; }
+
+/* 窄屏时：弹窗更紧凑一点 */
+@media (max-width: 768px) {
+  .photo-btn::after {
+    bottom: 115%;
+    max-width: min(86vw, 28rem);
+    font-size: 13px;
+  }
+}
+
+/* 关掉动效（系统偏好：减少动画） */
+@media (prefers-reduced-motion: reduce) {
+  .photo-btn::after, .photo-btn::before { transition: none; }
+}
+
+/* === 页脚 Footer 区域 === */
+footer {
+  position: relative;   /* 建立层叠上下文 */
+  z-index: 1;           /* 放到 starfield 上面 */
+  background: #00000000;
+  color: #ffff62d0;
+  text-align: center;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  padding: 80px 20px 60px 20px;
+  margin-top: 140px;
+}
+
+
+footer h2 {
+  font-family: 'Bangers', cursive;
+  font-size: clamp(30px, 4vw, 50px);
+  margin-bottom: 40px;
+  text-shadow: 0 0 10px rgba(255, 255, 120, 0.4);
+}
+
+.footer-columns {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 80px;
+  max-width: 1100px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.footer-column {
+  min-width: 200px;
+}
+
+.footer-column h3 {
+  font-family: 'Bangers', cursive;
+  font-size: 22px;
+  margin-bottom: 14px;
+  color: #ffff62d0;
+}
+
+.footer-column p {
+  font-size: 15px;
+  color: rgba(255,255,180,0.8);
+  line-height: 1.7;
+  margin: 4px 0;
+}
+
+/* 小屏幕时 Footer 垂直排列 */
+@media (max-width: 768px) {
+  .footer-columns {
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+  }
+  .footer-column {
+    text-align: center;
+  }
+}
+
+.video-container {
+  margin-top: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
+.video-container video {
+  width: 70%;
+  max-width: 800px;
+  border: none;
+  outline: none;
+  border-radius: 12px;
+  box-shadow: 0 0 30px rgba(255, 255, 120, 0.2);
+}
+.section-title {
+  font-family: 'Bangers', cursive;
+  color: #ffff62d0;
+  text-align: center;
+  font-size: clamp(48px, 5vw, 72px); /* 稍微柔和一些比例 */
+  letter-spacing: 2px;
+  text-shadow: 
+    0 0 12px rgba(255,255,150,0.7),
+    0 0 30px rgba(255,255,100,0.4);
+  margin-top: 190px;   /* ✅ 距离视频的间距更自然 */
+  margin-bottom: 20px; /* ✅ 与下方内容保持节奏 */
+}
