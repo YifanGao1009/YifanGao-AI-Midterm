@@ -10,7 +10,7 @@
     html, body {
       height: 100%;
       margin: 0;
-      background: #000;      /* 全黑背景 */
+      background: #000;
       color: #ffff62d0;
       font-family: 'Bangers', cursive;
     }
@@ -43,45 +43,50 @@
       text-shadow: 0 0 10px rgb(237, 237, 73), 0 0 24px rgba(255,255,130,.36);
     }
 
-    /* 两张图的画廊 */
+    /* 左右两张图 */
     .gallery {
       flex: 1;
       display: grid;
-      grid-template-columns: repeat(2, 1fr); /* 一行两张 */
+      grid-template-columns: 3fr 2fr;   /* 左边宽一点 */
       gap: 80px;
       padding: 40px 6vw 60px;
       place-items: center;
     }
 
     .gallery img {
-      width: min(26vw, 360px);
-      height: auto;
       display: block;
-      opacity: .7;
+      height: auto;
       border: none;
       outline: none;
       box-shadow: none;
-      object-fit: cover;
+      transition: transform .16s ease, opacity .16s ease;
+      opacity: .85;
+    }
 
-      /* 默认：有羽化边缘的圆形聚光灯 */
+    /* 左边：网页截图 —— 矩形、不要裁剪 */
+    .gallery img.full-img {
+      width: min(50vw, 900px);
+      object-fit: contain;
+      -webkit-mask-image: none;
+      mask-image: none;
+    }
+
+    /* 右边：头像 —— 圆形聚光灯效果 */
+    .gallery img.portrait {
+      width: min(26vw, 360px);
+      object-fit: cover;
       -webkit-mask-image: radial-gradient(circle at center, #000 72%, rgba(0,0,0,0) 100%);
       mask-image: radial-gradient(circle at center, #000 72%, rgba(0,0,0,0) 100%);
       -webkit-mask-size: 100% 100%;
       mask-size: 100% 100%;
       -webkit-mask-repeat: no-repeat;
       mask-repeat: no-repeat;
-      transition: transform .16s ease, opacity .16s ease;
     }
 
-    /* 第一张：网页截图——不要裁成圆形，要更大一点 */
-    .gallery img.full-img {
-      width: min(40vw, 720px);  /* 第一张更大 */
-      -webkit-mask-image: none;
-      mask-image: none;
+    .gallery img:hover {
+      transform: translateY(-2px) scale(1.02);
       opacity: 1;
     }
-
-    .gallery img:hover { transform: translateY(-2px) scale(1.02); opacity: 1; }
 
     /* Label 信息区 */
     .label-box {
@@ -104,8 +109,14 @@
     }
 
     @media (max-width: 900px) {
-      .gallery { grid-template-columns: 1fr; gap: 24px; }
-      .gallery img { width: 82vw; }
+      .gallery {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+      .gallery img.full-img,
+      .gallery img.portrait {
+        width: 82vw;
+      }
       .label-box { max-width: 80vw; font-size: 14px; }
     }
   </style>
@@ -119,7 +130,9 @@
     </div>
 
     <main class="gallery">
-      <img class="portrait" src="shark human.png" alt="Shark Human portrait" loading="lazy">
+      <!-- 左边：网页截图 -->
+      <img class="full-img" src="shark human.png" alt="Shark Human website" loading="lazy">
+      <!-- 右边：肖像 -->
       <img class="portrait" src="shark human.jpg" alt="Shark Human portrait" loading="lazy">
     </main>
 
@@ -131,4 +144,5 @@
   </div>
 </body>
 </html>
+
 
