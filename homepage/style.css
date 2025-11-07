@@ -197,7 +197,7 @@ h1, h2, h3, h4, h5, h6 {
 .photo-container .photo-btn:nth-child(2)::after { content: "Bat Human"; }
 .photo-container .photo-btn:nth-child(3)::after { content: "Axolotl Human"; }
 .photo-container .photo-btn:nth-child(4)::after { content: "Giraffe Human"; }
-.photo-container .photo-btn:nth-child(5)::after { content: "Sharp Human"; }
+.photo-container .photo-btn:nth-child(5)::after { content: "Shark Human"; }
 .photo-container .photo-btn:nth-child(6)::after { content: "Frog Human"; }
 
 /* 窄屏时：弹窗更紧凑一点 */
