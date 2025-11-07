@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>sharkhuman</title>
+  <title>Shark Human</title>
   <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
 
   <style>
@@ -43,38 +43,36 @@
       text-shadow: 0 0 10px rgb(237, 237, 73), 0 0 24px rgba(255,255,130,.36);
     }
 
-    /* 左右两张图 */
+    /* 两张图一行，居中对齐 */
     .gallery {
       flex: 1;
       display: grid;
-      grid-template-columns: 3fr 2fr;   /* 左边宽一点 */
-      gap: 80px;
+      grid-template-columns: repeat(2, 1fr);
+      align-items: center; /* 垂直居中 */
+      justify-items: center; /* 水平居中 */
+      gap: 60px;
       padding: 40px 6vw 60px;
-      place-items: center;
     }
 
-    .gallery img {
-      display: block;
+    /* 两张图大小一致 */
+    .gallery img.full-img,
+    .gallery img.portrait {
+      width: min(28vw, 420px);
       height: auto;
-      border: none;
-      outline: none;
-      box-shadow: none;
-      transition: transform .16s ease, opacity .16s ease;
+      display: block;
+      object-fit: cover;
       opacity: .85;
+      transition: transform .16s ease, opacity .16s ease;
     }
 
-    /* 左边：网页截图 —— 矩形、不要裁剪 */
+    /* 左边（正常矩形） */
     .gallery img.full-img {
-      width: min(50vw, 900px);
-      object-fit: contain;
       -webkit-mask-image: none;
       mask-image: none;
     }
 
-    /* 右边：头像 —— 圆形聚光灯效果 */
+    /* 右边（带圆形聚光） */
     .gallery img.portrait {
-      width: min(26vw, 360px);
-      object-fit: cover;
       -webkit-mask-image: radial-gradient(circle at center, #000 72%, rgba(0,0,0,0) 100%);
       mask-image: radial-gradient(circle at center, #000 72%, rgba(0,0,0,0) 100%);
       -webkit-mask-size: 100% 100%;
@@ -88,7 +86,7 @@
       opacity: 1;
     }
 
-    /* Label 信息区 */
+    /* 信息框 */
     .label-box {
       background: rgba(64, 64, 64, 0.8);
       color: #ffff62d0;
@@ -109,14 +107,8 @@
     }
 
     @media (max-width: 900px) {
-      .gallery {
-        grid-template-columns: 1fr;
-        gap: 24px;
-      }
-      .gallery img.full-img,
-      .gallery img.portrait {
-        width: 82vw;
-      }
+      .gallery { grid-template-columns: 1fr; gap: 24px; }
+      .gallery img { width: 82vw; }
       .label-box { max-width: 80vw; font-size: 14px; }
     }
   </style>
@@ -130,9 +122,9 @@
     </div>
 
     <main class="gallery">
-      <!-- 左边：网页截图 -->
-      <img class="full-img" src="shark human.png" alt="Shark Human website" loading="lazy">
-      <!-- 右边：肖像 -->
+      <!-- 左图 -->
+      <img class="full-img" src="shark human.png" alt="Shark Human face" loading="lazy">
+      <!-- 右图 -->
       <img class="portrait" src="shark human.jpg" alt="Shark Human portrait" loading="lazy">
     </main>
 
@@ -144,5 +136,6 @@
   </div>
 </body>
 </html>
+
 
 
